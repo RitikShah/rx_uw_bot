@@ -6,11 +6,13 @@ import tk
 from random import randint
 from discord.ext import commands
 
-print('Y for Debug')
-if input() == 'Y':
+print('y for Debug')
+if input() == 'y':
+	print('Debug')
 	meetup_channel = 400567035249033217
 	meetup_mention = '<@&489719429224071168>'
 else:
+	print('Main Server')
 	meetup_channel = 362691852274630657
 	meetup_mention = '<@&487120797190848534>'
 
