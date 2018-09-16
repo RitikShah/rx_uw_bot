@@ -6,6 +6,14 @@ import tk
 from random import randint
 from discord.ext import commands
 
+print('Y for Debug')
+if input() == 'Y':
+	meetup_channel = 400567035249033217
+	meetup_mention = '<@&489719429224071168>'
+else:
+	meetup_channel = 362691852274630657
+	meetup_mention = '<@&487120797190848534>'
+
 logging.basicConfig(level="INFO")
 
 bot = commands.Bot(command_prefix="?", description="Rx has the best bot let that be heard.")
@@ -13,7 +21,7 @@ setattr(bot, "logger", logging.getLogger("log"))
 url_pattern = '(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]\\.[^\\s]{2,})'
 
 event_list = []
-meetup_channel = 400567035249033217
+#meetup_channel = 400567035249033217
 #meetup_channel = 362691852274630657
 
 rx_uw_bot_id = 489158438086115328
@@ -41,15 +49,15 @@ async def on_reaction_add(reaction, user):
 				await reaction.message.channel.send("✅ Event Unpinned!", delete_after=5.0)
 				await event[0].unpin()
 
+'''
 @bot.event
 async def on_guild_channel_pins_update(channel, last_pin):
 	message_pins = await channel.pins()
-	print(message_pins)
 	for event in event_list:
 		for pin in message_pins:
 			if event[0].id == pin.id:
 				event_list.remove(event)
-				print(event_list)
+'''
 
 @bot.event
 async def on_message_delete(message):
@@ -86,7 +94,7 @@ async def meetup(ctx):
 
 	def is_url(url):
 		prog = re.compile(url_pattern)
-		return prog.match(url)
+		return prog.search(url)
 
 	try:
 		bot_messages.append(await ctx.send("What is the title of this meetup?", delete_after=60.0))
@@ -139,7 +147,8 @@ async def meetup(ctx):
 		embed.add_field(name='Cost', value=event['cost'].content, inline=True)
 		embed.set_footer(text=event['description'].content)
 		
-		embed_msg = await ctx.send('@meetup', embed=embed)
+		# meetup role: <@&487120797190848534>
+		embed_msg = await ctx.send('A new {} has appeared!'.format(meetup_mention), embed=embed)
 		await embed_msg.pin()
 		await embed_msg.add_reaction('👍')
 		await embed_msg.add_reaction('👀')
