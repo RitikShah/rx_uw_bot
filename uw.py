@@ -1,8 +1,8 @@
-import token
 import discord
 import logging
 import asyncio
 import re
+import tk
 from random import randint
 from discord.ext import commands
 
@@ -157,4 +157,4 @@ async def meetup(ctx):
 
 		await ctx.message.delete()
 
-bot.run(token.token())
+bot.run(tk.token())
