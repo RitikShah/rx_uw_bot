@@ -6,19 +6,8 @@ import tk
 from random import randint
 from discord.ext import commands
 
-'''
-print('y for Debug')
-if input() == 'y':
-	print('Debug')
-	meetup_channel = 400567035249033217
-	meetup_mention = '<@&489719429224071168>'
-else:
-	print('Main Server')
-	meetup_channel = 362691852274630657
-	meetup_mention = '<@&487120797190848534>'
-'''
-
 meetup_channels = (400567035249033217, 362691852274630657)
+meetup_mention = '<@&487120797190848534>'
 
 logging.basicConfig(level="INFO")
 
@@ -33,7 +22,7 @@ event_list = []
 rx_uw_bot_id = 489158438086115328
 
 def check_meetup_channel(ctx):
-	return ctx.message.channel.id == meetup_channel
+	return ctx.message.channel.id in meetup_channels
 
 x_emojis = ['❎', '❌', '✖️']
 check_emojis = ['☑️', '✔️', '✅']
@@ -155,7 +144,11 @@ async def meetup(ctx):
 		embed.add_field(name='Cost', value=event['cost'].content, inline=True)
 		embed.set_footer(text=event['description'].content)
 		
-		# meetup role: <@&487120797190848534>
+		if ctx.message.channel.id == 400567035249033217:
+			meetup_mention = '<@&489719429224071168>'
+		elif ctx.message.channel.id == 362691852274630657:
+			meetup_mention = '<@&487120797190848534>'
+
 		embed_msg = await ctx.send('A new {} has appeared!'.format(meetup_mention), embed=embed)
 		await embed_msg.pin()
 		await embed_msg.add_reaction('👍')
