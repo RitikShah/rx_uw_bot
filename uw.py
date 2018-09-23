@@ -16,6 +16,8 @@ else:
 	meetup_channel = 362691852274630657
 	meetup_mention = '<@&487120797190848534>'
 
+print(meetup_channel)
+
 logging.basicConfig(level="INFO")
 
 bot = commands.Bot(command_prefix="?", description="Rx has the best bot let that be heard.")
@@ -75,16 +77,18 @@ async def hello(ctx):
 	if rint > 999:
 		message = await ctx.send("Honestly, if you see this message, you are amazing. This message has a 0.1% chance of showing. \nYou, {}, are a motherfucking God\n\nDo screenshot this. \n~ Rx".format(ctx.author))
 	elif rint > 990:
-		message = await ctx.send("Wow, hit the lottery today {}, cause you just hit a 1% lottery!".format(ctx.author))
+		message = await ctx.send("Wow, you lucky duck. {}, you just hit the 1% lottery!".format(ctx.author))
 	elif rint > 900:
 		message = await ctx.send("Good day, my good sir, {}".format(ctx.author))
+	elif rint == 666:
+		message = await ctx.send("*glares into your soul*")
 	elif rint > 500:
 		message = await ctx.send("Hello?")
 	else:
 		message = await ctx.send("Hello world!")
 
 @bot.command()
-@commands.cooldown(rate=3,per=120,type=commands.BucketType.user)
+@commands.cooldown(rate=1,per=120,type=commands.BucketType.user)
 @commands.check(check_meetup_channel)
 @commands.has_any_role('meetup', 'Mods', 'Admins')
 async def meetup(ctx):
