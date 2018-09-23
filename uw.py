@@ -87,7 +87,7 @@ async def meetup(ctx):
 	bot_messages = []
 
 	def check(msg):
-		return msg.author == ctx.author and msg.channel.id == meetup_channel
+		return msg.author == ctx.author and msg.channel.id in meetup_channels
 
 	def is_url(url):
 		prog = re.compile(url_pattern)
