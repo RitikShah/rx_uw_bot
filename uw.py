@@ -22,7 +22,7 @@ meetup_channels = (400567035249033217, 362691852274630657)
 
 logging.basicConfig(level="INFO")
 
-bot = commands.Bot(command_prefix="!", description="Rx has the best bot let that be heard.")
+bot = commands.Bot(command_prefix="~", description="Rx has the best bot let that be heard.")
 setattr(bot, "logger", logging.getLogger("log"))
 url_pattern = '(https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\\.[^\\s]{2,}|https?:\\/\\/(?:www\\.|(?!www))[a-zA-Z0-9]\\.[^\\s]{2,}|www\\.[a-zA-Z0-9]\\.[^\\s]{2,})'
 
@@ -173,7 +173,5 @@ async def meetup(ctx):
 			await msg.delete()
 
 		await ctx.message.delete()
-
-async def meetup(ctx):
 
 bot.run(tk.token())
